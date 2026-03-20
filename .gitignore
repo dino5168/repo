@@ -1,0 +1,22 @@
+# Node
+app-front/node_modules/
+app-front/dist/
+app-front/.vite/
+
+# Python / uv
+app-back/.venv/
+app-back/__pycache__/
+app-back/**/__pycache__/
+app-back/**/*.pyc
+app-back/.pytest_cache/
+app-back/.mypy_cache/
+app-back/.ruff_cache/
+
+# Env
+app-back/.env
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
