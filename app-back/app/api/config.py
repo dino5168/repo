@@ -7,4 +7,4 @@ router = APIRouter(prefix="/config", tags=["config"])
 
 @router.get("")
 async def get_config() -> dict[str, str]:
-    return {"title": settings.app_title}
+    return {"title": settings.app_title, "web_title": settings.web_title}

@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "label": "行銷",
+      "items": [
+        { "key": "dashboard", "label": "儀表板", "icon": "LayoutDashboard", "path": "/", "children": [] },
+        { "key": "marketplace", "label": "Marketplace", "icon": "ShoppingCart", "path": "/marketplace", "children": [] },
+        { "key": "orders", "label": "Orders", "icon": "ShoppingBasket", "path": "/orders", "children": [] },
+        {
+          "key": "tracking",
+          "label": "Tracking",
+          "icon": "Package",
+          "path": "/tracking",
+          "children": [
+            { "key": "tracking-overview", "label": "Overview", "icon": "MapPin", "path": "/tracking/overview", "children": [] },
+            { "key": "tracking-history", "label": "History", "icon": "Clock", "path": "/tracking/history", "children": [] }
+          ]
+        },
+        { "key": "customers", "label": "Customers", "icon": "Users", "path": "/customers", "children": [] },
+        { "key": "discounts", "label": "Discounts", "icon": "Tag", "path": "/discounts", "children": [] }
+      ]
+    },
+    {
+      "label": "付款",
+      "items": [
+        { "key": "ledger", "label": "Ledger", "icon": "BookOpen", "path": "/ledger", "children": [] },
+        { "key": "taxes", "label": "Taxes", "icon": "DollarSign", "path": "/taxes", "children": [] }
+      ]
+    },
+    {
+      "label": "SYSTEM",
+      "items": [
+        { "key": "settings", "label": "Settings", "icon": "Settings", "path": "/settings", "children": [] }
+      ]
+    }
+  ]
+}

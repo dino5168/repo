@@ -4,6 +4,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_title: str = "app-front"
     allow_origins: list[str] = ["http://localhost:5173"]
+    menu_admin: str = "menu_admin.json"
+    web_title: str = "Welcome"
 
     model_config = SettingsConfigDict(
         env_file=".env",
