@@ -96,9 +96,17 @@ npm run lint       # ESLint 檢查
 
 **環境變數（`app-front/.env`）：**
 
-| 變數 | 預設值 | 說明 |
-|------|--------|------|
-| `VITE_API_URL` | `http://localhost:8000` | 後端 API 位址 |
+建立 `app-front/.env`（不進 git）：
+
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+| 變數 | 預設值 | 必填 | 說明 |
+|------|--------|:----:|------|
+| `VITE_API_URL` | `http://localhost:8000` | | 後端 API 位址，Vite 開發伺服器使用 |
+
+> **注意：** Vite 只會將 `VITE_` 開頭的變數注入至瀏覽器端，請勿將機密資訊放入此處。
 
 ---
 
@@ -136,7 +144,20 @@ uv run mypy app/                       # 型別檢查
 
 **環境變數（`app-back/.env`）：**
 
-| 變數 | 預設值 | 說明 |
-|------|--------|------|
-| `APP_TITLE` | `app-front` | 網頁標題 |
-| `ALLOW_ORIGINS` | `["http://localhost:5173"]` | CORS 允許來源 |
+複製範本後編輯：
+
+```bash
+cp app-back/.env.example app-back/.env
+```
+
+```env
+APP_TITLE=app-front
+ALLOW_ORIGINS=["http://localhost:5173","http://localhost:5174"]
+```
+
+| 變數 | 預設值 | 必填 | 說明 |
+|------|--------|:----:|------|
+| `APP_TITLE` | `app-front` | | 前端網頁的 `<title>` 標題，由 `/api/config` 回傳 |
+| `ALLOW_ORIGINS` | `["http://localhost:5173"]` | ✓ | CORS 允許的來源清單（JSON 陣列格式），多個來源以逗號分隔 |
+
+> **注意：** `.env` 已加入 `.gitignore`，請勿提交至版本控制。正式環境部署時請依實際 domain 調整 `ALLOW_ORIGINS`。
