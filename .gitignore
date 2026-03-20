@@ -15,6 +15,9 @@ app-back/.ruff_cache/
 # Env
 app-back/.env
 
+# Doc
+doc/
+
 # OS / IDE
 .DS_Store
 Thumbs.db
