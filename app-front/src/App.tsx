@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Sidebar } from '@/components/sidebar/Sidebar'
+import { useMenu } from '@/hooks/useMenu'
+import Home from '@/pages/Home'
+import pageRegistry from '@/pages/pageRegistry'
+
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
 
@@ -14,6 +18,7 @@ function Placeholder({ title }: { title: string }) {
 
 function App() {
   const [webTitle, setWebTitle] = useState('')
+  const { groups, allItems } = useMenu()
 
   useEffect(() => {
     fetch(`${API_BASE}/api/config`)
@@ -22,28 +27,30 @@ function App() {
         document.title = data.title
         setWebTitle(data.web_title)
       })
-      .catch(() => {
-        // fallback: keep existing title
-      })
+      .catch(() => {})
   }, [])
 
   return (
     <BrowserRouter>
       <div className="flex h-screen bg-gray-50">
-        <Sidebar />
+        <Sidebar groups={groups} />
         <main className="flex-1 overflow-y-auto p-8">
           <Routes>
-            <Route path="/" element={"home"}/>
-            <Route path="/marketplace" element={<Placeholder title={webTitle} />} />
-            <Route path="/orders" element={<Placeholder title={webTitle} />} />
-            <Route path="/tracking" element={<Placeholder title={webTitle} />} />
-            <Route path="/tracking/overview" element={<Placeholder title={webTitle} />} />
-            <Route path="/tracking/history" element={<Placeholder title={webTitle} />} />
-            <Route path="/customers" element={<Placeholder title={webTitle} />} />
-            <Route path="/discounts" element={<Placeholder title={webTitle} />} />
-            <Route path="/ledger" element={<Placeholder title={webTitle} />} />
-            <Route path="/taxes" element={<Placeholder title={webTitle} />} />
-            <Route path="/settings" element={<Placeholder title={webTitle} />} />
+            {/* 首頁固定對應 Home 元件 */}
+            <Route path="/" element={<Home />} />
+            {/* 其餘路由由選單動態產生 */}
+            {allItems
+              .filter((item) => item.path !== '/')
+              .map((item) => {
+                const Page = pageRegistry[item.path]
+                return (
+                  <Route
+                    key={item.key}
+                    path={item.path}
+                    element={Page ? <Page /> : <Placeholder title={webTitle} />}
+                  />
+                )
+              })}
           </Routes>
         </main>
       </div>

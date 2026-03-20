@@ -3,7 +3,6 @@ import { NavLink, useLocation } from 'react-router-dom'
 import * as icons from 'lucide-react'
 import type { LucideProps } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { fetchMenu } from '@/api/menu'
 import type { MenuGroup, MenuItem } from '@/types/menu'
 
 // ── Icon resolver ──────────────────────────────────────────────
@@ -131,16 +130,9 @@ function SidebarGroup({ group, collapsed }: { group: MenuGroup; collapsed: boole
 }
 
 // ── Sidebar ────────────────────────────────────────────────────
-export function Sidebar() {
-  const [groups, setGroups] = useState<MenuGroup[]>([])
+export function Sidebar({ groups }: { groups: MenuGroup[] }) {
   const [darkMode, setDarkMode] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
-
-  useEffect(() => {
-    fetchMenu()
-      .then((data) => setGroups(data.groups))
-      .catch(() => {})
-  }, [])
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
